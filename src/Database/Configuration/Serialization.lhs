@@ -1,7 +1,6 @@
 Versioned serialization to and from a file. 
 
 > module Database.Configuration.Serialization(readTree, writeTree) where
-> import qualified Database.Configuration as Pure
 > import Database.Configuration.Types
 > import System.IO()
 > import Control.Monad
@@ -9,7 +8,7 @@ Versioned serialization to and from a file.
 > import qualified Data.Map as Map
 > import System.Directory(doesFileExist)
 
-This is a very straight-forward (i.e., primitive) serialization mechanism that simply writes out binary files containing the entire tree.
+This is a very straight-forward (i.e., primitive) serialization mechanism that simply writes out binary files containing the entire tree. All of this subject to change once we decide on a permanent public API.
 
 > instance (Binary a) => Binary (Tree a) where
 >   put x = do put currentVersion

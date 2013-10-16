@@ -1,7 +1,9 @@
 Expansion of variables in a string.
 
+> {-# LANGUAGE RankNTypes  #-}
 > module Database.Configuration.Substitution(substitution, Data) where
 > import qualified Data.Set as Set
+> import Data.Functor.Identity (Identity)
 > import Control.Applicative hiding ((<|>), many, optional)
 > import Text.Parsec.Perm()
 > import Text.Parsec.Pos()
@@ -36,4 +38,9 @@ And then, the parser in its entirety:
 > variableRef = Var <$> (char '$' *> between (char '{') (char '}') (many1 (noneOf "${}")))
 > rawString = Raw <$> many1 (noneOf "$")
 
+
+Provide some type definitions to suppress compiler warnings:
+
+> varParser :: forall u. ParsecT Data u Identity [PartType]
+> escapeSequence, variableRef, rawString :: forall u. ParsecT Data u Identity PartType
 

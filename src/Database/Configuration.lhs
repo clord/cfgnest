@@ -60,6 +60,10 @@ Moving down, we break the list of children trees, and put our focus as the first
 >                                               , crumbConfig = treeCfg tree
 >                                               , crumbRight  = rs
 >                                               } : bs)
+
+A key helper, which finds or creates a key (siblings to the right are in `snd`)
+
+> extractOrCreateTree :: Key -> [Tree a] -> (Tree a, [Tree a])
 > extractOrCreateTree key [] = (Tree key Map.empty [], [])
 > extractOrCreateTree _ (a:rs) = (a, rs)
 
@@ -102,7 +106,9 @@ Moving on to queries, a primary concern is finding all nodes of the tree that ar
 
 > configurationForPath :: Path -> [Tree a] -> Configuration a
 > configurationForPath [] _ = Map.empty
-> configurationForPath (q:qs) ts = let ms = filter (keyIs q) ts in Map.unions (map (configurationForPath qs . map subtrees) ms ++ map treeCfg ms)
+> configurationForPath (q:qs) ts = let ms = filter (keyIs q) ts 
+>                                   in Map.unions (map (configurationForPath qs) (map subtrees ms) ++ 
+>                                                  map treeCfg ms)
 
 
 Since the zipper is unzipped at the right place -- and is even kept in the right order -- it's fairly easy to turn any zipper into a configuration for the path the zipper is at. This method is more efficient than the above if you already have an unzipped zipper (you only pay the overhead for combining the configuration sets):
