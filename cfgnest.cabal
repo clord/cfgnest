@@ -1,0 +1,33 @@
+name:                cfgnest
+version:             0.1.0.0
+synopsis:            Hosts a simple configuration database for other nodes on the network.  
+description:         This tool replaces an internal tool I help maintain for the compiler team of my employer. 
+                     This version is several orders faster than the older ruby-based code that it replaces. 
+                     Keys are matched from the leaf up to the root, allowing for specialization of configuration.
+                     Supports substitution in values, which are resolved at the same context. 
+                     This model enables generic keys placed at the root, and specialized variables defined in leaves. 
+homepage:            http://c.lord.ac/posts/2013-08-01-cfgnest-configuration-server.html
+license:             BSD3
+license-file:        LICENSE
+author:              Christopher C. Lord
+maintainer:          christopher@lord.ac
+copyright:           Copyright 2013
+category:            Database
+build-type:          Simple
+cabal-version:       >=1.8
+
+executable cfgnestd
+  main-is: Main.hs
+  hs-source-dirs: src
+  build-depends: base
+  build-depends: stm >= 2.4 && < 2.5
+  build-depends: containers == 0.5.*
+  build-depends: parsec == 3.1.*
+  build-depends: msgpack == 0.7.*
+  build-depends: unix == 2.6.*
+  build-depends: msgpack-rpc == 0.9.*
+  build-depends: transformers == 0.3.*
+  build-depends: binary == 0.5.*
+  build-depends: directory == 1.2.*
+  build-depends: bytestring == 0.10.*
+  ghc-options: -threaded -Wall -fwarn-tabs -funbox-strict-fields -O2 -fno-warn-unused-do-bind
