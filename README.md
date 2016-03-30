@@ -1,15 +1,3 @@
-cfgnest
-=======
-
-Hosts a reverse-lookup configuration database for other nodes on the network
-
-This tool replaces an internal tool I help maintain for the compiler team of my employer. 
-This version is several orders faster than the older ruby-based code that it replaces. 
-Keys are matched from the leaf up to the root, allowing for specialization of configuration. 
-This model enables generic keys placed at the root, and specialized variables defined in leaves. 
-
-Supports substitution in values (syntax: `${Key}`), which are resolved at the same context. 
-
 # Introduction
 
 I used to manage and maintain a very complicated pice of code that has a great deal of complex configuration options. Early on, this tool was based on nearly turing-complete text files, with nesting rules and complicated interactions. All of this needed to go, so myself and a small team set out to replace most of it. One of the components I factored out is a simplification of the configuration subsystem. The result I think is both novel and generally useful, so I'm open-sourcing it under 3-clause BSD. 
