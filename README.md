@@ -2,6 +2,8 @@
 
 I used to manage and maintain a very complicated pice of code that has a great deal of complex configuration options. Early on, this tool was based on nearly turing-complete text files, with nesting rules and complicated interactions. All of this needed to go, so myself and a small team set out to replace most of it. One of the components I factored out is a simplification of the configuration subsystem. The result I think is both novel and generally useful, so I'm open-sourcing it under 3-clause BSD. 
 
+<a href="https://www.buymeacoffee.com/clord" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
 # CfgNest Model
 
 Like most configuration tools, `cfgnest` is a nested key-value database with substitution. The main difference is that `cfgnest` does lookup differently — keys are searched from the leaves *out* to the root. This might sound initially like a bad idea, but it leads to several nice properties. Most configuration is boilerplate, and then details are provided by particular subsystems. The benefit of CfgNest is that if we arrange configuration with the most specific stuff at the leaves, then we can move all of the generic stuff up to the root where it can be shared.
